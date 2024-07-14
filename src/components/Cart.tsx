@@ -8,16 +8,16 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Separator } from "./ui/separator";
-import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import Image from "next/image";
-import { ScrollArea } from "./ui/scroll-area";
-import CartItem from "./CartItem";
-import { useEffect, useState } from "react";
+} from "~/components/ui/sheet";
+import { Separator } from "~/components/ui/separator";
 import { formatPrice } from "~/lib/utils";
+import Link from "next/link";
+import { buttonVariants } from "~/components/ui/button";
+import Image from "next/image";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import { useEffect, useState } from "react";
 import { useCart } from "~/hooks/use-cart";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const { items } = useCart();
@@ -31,14 +31,14 @@ const Cart = () => {
 
   const cartTotal = items.reduce(
     (total, { product }) => total + product.price,
-    0
+    0,
   );
 
   const fee = 1;
 
   return (
     <Sheet>
-      <SheetTrigger className="group -m-2 flex items-center p-2">
+      <SheetTrigger className="group -m-2 flex items-center p-2  ">
         <ShoppingCart
           aria-hidden="true"
           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"

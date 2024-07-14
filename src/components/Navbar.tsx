@@ -6,6 +6,8 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import UserAccountNav from "./UserAccountNav";
 import NavItems from "./NavItems";
+import Cart from "./Cart";
+import MobileNav from "./MobileNav";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
@@ -14,12 +16,12 @@ export default async function Navbar() {
   void api.post.getLatest.prefetch();
 
   return (
-    <HydrateClient>
       <div className="sticky inset-x-0 top-0 z-50 h-16 bg-white">
         <header className="relative bg-white">
           <MaxWidthWrapper>
             <div className="border-b border-gray-200">
               <div className="flex h-16 items-center">
+                <MobileNav/>
                 <div className="ml-4 flex lg:ml-0">
                   <Link href="/">
                     <Image
@@ -68,6 +70,9 @@ export default async function Navbar() {
                         <UserAccountNav user={session.user} />
                       </>
                     )}
+                    <div className="ml-4 flow-root lg:ml-6">
+                      <Cart />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -75,6 +80,5 @@ export default async function Navbar() {
           </MaxWidthWrapper>
         </header>
       </div>
-    </HydrateClient>
   );
 }
