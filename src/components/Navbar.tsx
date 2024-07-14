@@ -5,6 +5,7 @@ import { api, HydrateClient } from "~/trpc/server";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import UserAccountNav from "./UserAccountNav";
+import NavItems from "./NavItems";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
@@ -31,7 +32,9 @@ export default async function Navbar() {
                   </Link>
                 </div>
 
-                <div className="z-50 hidden lg:ml-8 lg:block lg:self-stretch"></div>
+                <div className="z-50 hidden lg:ml-8 lg:block lg:self-stretch">
+                  <NavItems />
+                </div>
 
                 <div className="ml-auto flex items-center">
                   <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
