@@ -10,6 +10,7 @@ import SpotifyProvider from "next-auth/providers/spotify";
 import GoogleProvider from "next-auth/providers/google";
 import { env } from "~/env";
 import { db } from "~/server/db";
+import { UserRole } from "@prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -22,14 +23,14 @@ declare module "next-auth" {
     user: {
       id: string;
       // ...other properties
-      // role: UserRole;
+       role: UserRole;
     } & DefaultSession["user"];
   }
 
-  // interface User {
+   interface User {
   //   // ...other properties
-  //   // role: UserRole;
-  // }
+   role: UserRole;
+   }
 }
 
 /**
@@ -44,7 +45,10 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        role:UserRole,
       },
+     
     }),
   },
   adapter: PrismaAdapter(db) as Adapter,

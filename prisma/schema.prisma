@@ -50,13 +50,18 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  role          String    @default("buyer")
   shops         Shop[]
   products      Product[]
   orders        Order[]
+  role           UserRole  @default(USER)
 
-  Admin Admin[]
 }
+
+enum UserRole{
+  ADMIN
+  USER
+}
+
 
 model VerificationToken {
   identifier String
@@ -116,10 +121,3 @@ model Category {
   products Product[]
 }
 
-model Admin {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
