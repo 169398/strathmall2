@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getServerAuthSession } from "~/server/auth";
-import { api } from "~/trpc/server";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import UserAccountNav from "./UserAccountNav";
@@ -12,8 +11,7 @@ import MobileNav from "./MobileNav";
 export default async function Navbar() {
   const session = await getServerAuthSession();
 
-  // Prefetch any necessary data using tRPC
-  void api.post.getLatest.prefetch();
+  
 
   return (
       <div className="sticky inset-x-0 top-0 z-50 h-16 bg-white">
@@ -55,7 +53,7 @@ export default async function Navbar() {
                           aria-hidden="true"
                         />
                         <Link
-                          href="/sign-up"
+                          href="/api/auth/signin"
                           className={buttonVariants({
                             variant: "ghost",
                           })}
@@ -67,7 +65,7 @@ export default async function Navbar() {
 
                     {session && (
                       <>
-                        <UserAccountNav user={session.user} />
+                        <UserAccountNav user={{ ...session.user, hasShop: true }} />
                       </>
                     )}
                     <div className="ml-4 flow-root lg:ml-6">

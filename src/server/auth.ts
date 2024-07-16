@@ -13,6 +13,7 @@ import EmailProvider from "next-auth/providers/email";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { type UserRole } from "@prisma/client";
+import FacebookProvider from "next-auth/providers/facebook";
 
 
 declare module "next-auth" {
@@ -43,6 +44,12 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
+
+    FacebookProvider({
+      clientId: env.FACEBOOK_CLIENT_ID,
+      clientSecret: env.FACEBOOK_CLIENT_SECRET,
+    }),
+
     SpotifyProvider({
       clientId: env.SPOTIFY_CLIENT_ID,
       clientSecret: env.SPOTIFY_CLIENT_SECRET,
@@ -51,17 +58,18 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    EmailProvider({
-      server: {
-        host: "smtp.resend.com",
-        port: 587,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      },
-      from: process.env.EMAIL_FROM,
-    }),
+    
+    // EmailProvider({
+    //   server: {
+    //     host: "smtp.resend.com",
+    //     port: 587,
+    //     auth: {
+    //       user: process.env.EMAIL_USER,
+    //       pass: process.env.EMAIL_PASSWORD,
+    //     },
+    //   },
+    //   from: process.env.EMAIL_FROM,
+    // }),
   ],
  
 };
