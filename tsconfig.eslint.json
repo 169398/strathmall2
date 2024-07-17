@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json", // Inherit from your main config
+  "include": ["src/utils/trpc.ts"] // Include the specific file
+}

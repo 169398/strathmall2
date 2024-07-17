@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-'use client'
+"use client";
 
-import { Button } from '~/components/ui/button'
-import { PRODUCT_CATEGORIES } from '~/config'
-import { useCart } from '~/hooks/use-cart'
-import { cn, formatPrice } from '~/lib/utils'
-import { trpc } from '~/trpc/client'
-import { Check, Loader2, X } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Button } from "~/components/ui/button";
+import { PRODUCT_CATEGORIES } from "~/config";
+import { useCart } from "~/hooks/use-cart";
+import { cn, formatPrice } from "~/lib/utils";
+import { trpc } from "~/utils/trpc/client";
+import { Check, Loader2, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Page = () => {
-  const { items, removeItem } = useCart()
+  const { items, removeItem } = useCart();
 
-  const router = useRouter()
+  const router = useRouter();
 
   // const { mutate:  isPending } =
   //   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -25,19 +25,19 @@ const Page = () => {
   //     },
   //   })
 
-  const productIds = items.map(({ product }) => product.id)
+  const productIds = items.map(({ product }) => product.id);
 
-  const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   const cartTotal = items.reduce(
     (total, { product }) => total + product.price,
-    0
-  )
+    0,
+  );
 
-  const fee = 1
+  const fee = 1;
 
   return (
     <div className="bg-white">
@@ -68,8 +68,8 @@ const Page = () => {
                     alt="empty shopping cart hippo"
                   />
                 </div>
-                <h3 className="font-semibold text-2xl">Your cart is empty</h3>
-                <p className="text-muted-foreground text-center">
+                <h3 className="text-2xl font-semibold">Your cart is empty</h3>
+                <p className="text-center text-muted-foreground">
                   Whoops 🙊! Nothing to show here yet.
                 </p>
               </div>
@@ -84,10 +84,10 @@ const Page = () => {
               {isMounted &&
                 items.map(({ product }) => {
                   const label = PRODUCT_CATEGORIES.find(
-                    (c) => c.value === product.category
+                    (c) => c.value === product.category,
                   )?.label;
 
-                  const { image  }  = product.images[0];
+                  const { image } = product.images[0];
 
                   return (
                     <li key={product.id} className="flex py-6 sm:py-10">
@@ -129,7 +129,7 @@ const Page = () => {
                             </p>
                           </div>
 
-                          <div className="mt-4 sm:mt-0 sm:pr-9 w-20">
+                          <div className="mt-4 w-20 sm:mt-0 sm:pr-9">
                             <div className="absolute right-0 top-0">
                               <Button
                                 aria-label="remove product"
@@ -204,7 +204,7 @@ const Page = () => {
                 size="lg"
               >
                 {isPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin mr-1.5" />
+                  <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
                 ) : null}
                 Checkout
               </Button>
@@ -214,6 +214,6 @@ const Page = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Page
+export default Page;

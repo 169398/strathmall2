@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 import { Button, buttonVariants } from "~/components/ui/button";
 import MaxWidthWrapper from "~/components/MaxWidthWrapper";
+import Footer from "~/components/Footer";
 
 const perks = [
   {
@@ -80,6 +81,7 @@ export default function Home() {
             ))}
           </div>
         </MaxWidthWrapper>
+        <Footer />
       </section>
     </>
   );

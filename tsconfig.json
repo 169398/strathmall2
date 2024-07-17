@@ -29,6 +29,8 @@
       "~/*": ["./src/*"]
     }
   },
+
+ 
   "include": [
     ".eslintrc.cjs",
     "next-env.d.ts",
@@ -36,7 +38,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

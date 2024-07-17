@@ -76,30 +76,32 @@ model VerificationToken {
 model Shop {
   id          String    @id @default(cuid())
   name        String
-  images      String[]
+  imageUrl      String
   description String
-  whatsapp    String
-  Email       String
+  phoneNumber    String
+  category    String[]
+  ownerEmail       String
   offers      String?
   ownerId     String
-  owner       User      @relation(fields: [ownerId], references: [id])
+  owner       User      @relation(fields: [ownerId], references: [id] ,onDelete: Cascade)
   products    Product[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
 
+
 model Product {
   id          String   @id @default(cuid())
   name        String
-  images      String[]
+  imageUrl      String
   price       Float
   description String
-  inStock     Boolean
-  discount    String?
+  inStock     Boolean  @default(true)
+  discount    String? @default("0%")
   categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+  category    Category  @relation(fields: [categoryId], references: [id])
   shopId      String
-  shop        Shop     @relation(fields: [shopId], references: [id])
+  shop        Shop     @relation(fields: [shopId], references: [id] ,onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   User        User?    @relation(fields: [userId], references: [id])
