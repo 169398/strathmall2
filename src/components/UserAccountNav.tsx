@@ -4,6 +4,7 @@
 
 "use client";
 
+// import { useState } from "react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -13,57 +14,88 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import Link from "next/link";
+import { UserAvatar } from "./UserAvatar";
 
 type User = {
+  image: null;
   email: string;
-  hasShop: boolean;
+  hasshops: boolean;
   role: string;
+  name: string;
 };
 
 const UserAccountNav = ({ user }: { user: User }) => {
+
+    // const [showOnboarding, setShowOnboarding] = useState(false);
+
+
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild className="overflow-visible">
-      <Button variant="ghost" size="sm" className="relative">
-        My account
-      </Button>
-      </DropdownMenuTrigger>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger >
+          {/* <Button variant="ghost" size="sm" className="relative">
+            My account
+          </Button> */}
 
-      <DropdownMenuContent className="w-60 bg-white" align="end">
-      <div className="flex items-center justify-start gap-2 p-2">
-        <div className="flex flex-col space-y-0.5 leading-none">
-        <p className="text-sm font-medium text-black">{user.email}</p>
-        </div>
-      </div>
+          <UserAvatar
+            user={{ name: user.name || null, image: user.image ?? null }}
+            className="h-8 w-8"
+          />
+        </DropdownMenuTrigger>
 
-      <DropdownMenuSeparator />
+        <DropdownMenuContent className="w-60 bg-white" align="end">
+          <div className="flex items-center justify-start gap-2 p-2">
+            <div className="flex flex-col space-y-1 leading-none">
+              {user.name && <p className="font-medium">{user.name}</p>}
+              {user.email && (
+                <p className="w-[200px] truncate text-sm text-muted-foreground">
+                  {user.email}
+                </p>
+              )}
+            </div>
+          </div>
 
-      {user.hasShop && (
-        <DropdownMenuItem asChild className="cursor-pointer">
-        <Link href="/sell">Seller Dashboard</Link>
-        </DropdownMenuItem>
-      )}
+          <DropdownMenuSeparator />
 
-      {user.role === "admin" && (
-        <DropdownMenuItem asChild  className="cursor-pointer">
-        <Link href="/admin">Admin Dashboard</Link>
-        </DropdownMenuItem>
-      )}
+          {user.hasshops && (
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/sell">Seller Dashboard</Link>
+            </DropdownMenuItem>
+          )}
 
-      {!user.hasShop && (
-        <DropdownMenuItem asChild   className="cursor-pointer">
-        <Link href="/create-shop">Create a Shop</Link>
-        </DropdownMenuItem>
-      )}
+          {user.role === "ADMIN" && (
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/admin">Admin Dashboard</Link>
+            </DropdownMenuItem>
+          )}
 
-      <Link href="/api/auth/signout">
-        <DropdownMenuItem className="cursor-pointer">
-        Log out
-        </DropdownMenuItem>
-      </Link>
-      </DropdownMenuContent>
-    </DropdownMenu>
-    );
+          {!user.hasshops && (
+            <DropdownMenuItem
+              asChild
+              className="cursor-pointer"
+              // onClick={() => setShowOnboarding(true)}
+            >
+              <Link href="/create-shop">Create a Shop</Link>
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem asChild>
+            <Link href="/settings">Settings</Link>
+          </DropdownMenuItem>
+
+          <Link href="/api/auth/signout">
+            <DropdownMenuItem className="cursor-pointer">
+              Log out
+            </DropdownMenuItem>
+          </Link>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {/* 
+      {showOnboarding && (
+        <ShopOnboarding onClose={() => setShowOnboarding(false)} />
+      )} */}
+    </>
+  );
 };
 
 export default UserAccountNav;

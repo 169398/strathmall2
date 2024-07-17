@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { PRODUCT_CATEGORIES } from '@/config'
-import { useCart } from '@/hooks/use-cart'
-import { cn, formatPrice } from '@/lib/utils'
-import { trpc } from '@/trpc/client'
+import { Button } from '~/components/ui/button'
+import { PRODUCT_CATEGORIES } from '~/config'
+import { useCart } from '~/hooks/use-cart'
+import { cn, formatPrice } from '~/lib/utils'
+import { trpc } from '~/trpc/client'
 import { Check, Loader2, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,12 +17,13 @@ const Page = () => {
 
   const router = useRouter()
 
-  const { mutate: createCheckoutSession, isPending } =
-    trpc.payment.createSession.useMutation({
-      onSuccess: ({ url }) => {
-        if (url) router.push(url)
-      },
-    })
+  // const { mutate:  isPending } =
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  //   trpc.payment.createSession.useMutation({
+  //     onSuccess: ({ url }) => {
+  //       if (url) router.push(url)
+  //     },
+  //   })
 
   const productIds = items.map(({ product }) => product.id)
 
@@ -85,7 +87,7 @@ const Page = () => {
                     (c) => c.value === product.category
                   )?.label;
 
-                  const { image } = product.images[0];
+                  const { image  }  = product.images[0];
 
                   return (
                     <li key={product.id} className="flex py-6 sm:py-10">
@@ -197,7 +199,7 @@ const Page = () => {
             <div className="mt-6">
               <Button
                 disabled={items.length === 0 || isPending}
-                onClick={() => createCheckoutSession({ productIds })}
+                onClick={() => ({ productIds })}
                 className="w-full"
                 size="lg"
               >

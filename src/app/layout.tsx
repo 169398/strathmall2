@@ -7,6 +7,10 @@ import { cn, constructMetadata } from "~/lib/utils";
 import Footer from "~/components/Footer";
 import { Toaster } from "sonner";
 import Navbar from "~/components/Navbar";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { ourFileRouter } from "~/app/api/uploadthing/core";
 
 export const metadata: Metadata = constructMetadata();
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +23,10 @@ export default function RootLayout({
       <body
         className={cn("relative h-full font-sans antialiased", inter.className)}
       >
+        <NextSSRPlugin
+        
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
         <main>
           <TRPCReactProvider>
             <Navbar />
