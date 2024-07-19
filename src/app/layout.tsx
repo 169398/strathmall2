@@ -9,7 +9,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 
 import { ourFileRouter } from "~/app/api/uploadthing/core";
-import { TRPCReactProvider } from "~/utils/trpc/react";
+import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = constructMetadata();
 const inter = Inter({ subsets: ["latin"] });

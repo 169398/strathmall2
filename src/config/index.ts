@@ -2,6 +2,7 @@ export const PRODUCT_CATEGORIES = [
   {
     label: "Categories",
     value: "ui_kits" as const,
+    
     featured: [
       {
         name: "Accessories",

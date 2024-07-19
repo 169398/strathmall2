@@ -26,20 +26,18 @@ type User = {
 
 const UserAccountNav = ({ user }: { user: User }) => {
 
-    // const [showOnboarding, setShowOnboarding] = useState(false);
 
 
 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger >
-          {/* <Button variant="ghost" size="sm" className="relative">
-            My account
-          </Button> */}
-
+        <DropdownMenuTrigger>
           <UserAvatar
-            user={{ name: user.name || null, image: user.image ?? null }}
+            user={{
+              name: user.name || null,
+              image: user.image ?? "https://avatar.vercel.sh/${use.name}?size=30",
+            }}
             className="h-8 w-8"
           />
         </DropdownMenuTrigger>
@@ -50,7 +48,7 @@ const UserAccountNav = ({ user }: { user: User }) => {
               {user.name && <p className="font-medium">{user.name}</p>}
               {user.email && (
                 <p className="w-[200px] truncate text-sm text-muted-foreground">
-                  {user.email}
+                  {user.email}k
                 </p>
               )}
             </div>

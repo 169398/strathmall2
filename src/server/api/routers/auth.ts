@@ -15,7 +15,6 @@ import { db } from "~/server/db";
 import { type UserRole } from "@prisma/client";
 import FacebookProvider from "next-auth/providers/facebook";
 
-
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
@@ -44,7 +43,6 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
-
     FacebookProvider({
       clientId: env.FACEBOOK_CLIENT_ID,
       clientSecret: env.FACEBOOK_CLIENT_SECRET,
@@ -58,7 +56,7 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    
+
     // EmailProvider({
     //   server: {
     //     host: "smtp.resend.com",
@@ -71,7 +69,6 @@ export const authOptions: NextAuthOptions = {
     //   from: process.env.EMAIL_FROM,
     // }),
   ],
- 
 };
 
 export const getServerAuthSession = () => getServerSession(authOptions);

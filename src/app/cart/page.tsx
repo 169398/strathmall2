@@ -5,25 +5,25 @@ import { Button } from "~/components/ui/button";
 import { PRODUCT_CATEGORIES } from "~/config";
 import { useCart } from "~/hooks/use-cart";
 import { cn, formatPrice } from "~/lib/utils";
-import { trpc } from "~/utils/trpc/client";
 import { Check, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { trpc } from "~/utils/trpc";
 
 const Page = () => {
   const { items, removeItem } = useCart();
 
   const router = useRouter();
 
-  // const { mutate:  isPending } =
-  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  //   trpc.payment.createSession.useMutation({
-  //     onSuccess: ({ url }) => {
-  //       if (url) router.push(url)
-  //     },
-  //   })
+  const { mutate:  isPending } =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    trpc.payment.createSession.useMutation({
+      onSuccess: ({ url }) => {
+        if (url) router.push(url)
+      },
+    })
 
   const productIds = items.map(({ product }) => product.id);
 

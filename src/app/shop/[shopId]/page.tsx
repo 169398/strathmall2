@@ -1,7 +1,7 @@
 import { type GetServerSideProps } from "next";
 import { toast } from "sonner";
 import ProductCard from "~/components/ProductsCard";
-import ShopCard from "~/components/ShopCard";
+import ShopCard from "~/components/Shop/ShopCard";
 import { trpc } from "~/utils/trpc";
 
 

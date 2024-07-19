@@ -1,17 +1,5 @@
-
+// src/utils/trpc.ts
 import { createTRPCReact } from "@trpc/react-query";
-import superjson from "superjson";
-import { httpBatchLink } from "@trpc/client";
-import { type AppRouter } from "~/server/api/root";
+import type { AppRouter } from "~/server/api/routers";
 
-// Create TRPC React hooks
 export const trpc = createTRPCReact<AppRouter>();
-
-export const trpcClient = trpc.createClient({
-  links: [
-    httpBatchLink({
-        url: "/api/trpc",
-        transformer: superjson,
-    }),
-  ],
-});

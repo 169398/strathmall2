@@ -106,7 +106,14 @@ export const shopRouter = createTRPCRouter({
       const shop = await prisma.shop.create({
         data: {
           ...input,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           ownerId: ctx.session.user.id,
+          name: input.name,
+          description: input.description,
+          phoneNumber: input.phoneNumber,
+          category: { set: input.categories },
+          imageUrl: input.imageUrl,
+          ownerEmail: input.ownerEmail,
         },
       });
       await prisma.$disconnect();

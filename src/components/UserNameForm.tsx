@@ -25,7 +25,7 @@ import { UsernameValidator } from '~/lib/validators/username'
 import LoadingButton from './LoadingButton'
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, 'id' | 'name'>
+  user: Pick<User, 'id' | 'name' |'email'>
 }
 
 
