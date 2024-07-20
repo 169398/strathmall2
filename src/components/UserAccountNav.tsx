@@ -1,11 +1,6 @@
 
-
-
-
 "use client";
 
-// import { useState } from "react";
-import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +10,7 @@ import {
 } from "./ui/dropdown-menu";
 import Link from "next/link";
 import { UserAvatar } from "./UserAvatar";
+import { signOut } from "next-auth/react";
 
 type User = {
   image: null;
@@ -36,7 +32,8 @@ const UserAccountNav = ({ user }: { user: User }) => {
           <UserAvatar
             user={{
               name: user.name || null,
-              image: user.image ?? "https://avatar.vercel.sh/${use.name}?size=30",
+              image:
+                user.image ?? "https://avatar.vercel.sh/${use.name}?size=30",
             }}
             className="h-8 w-8"
           />
@@ -48,7 +45,7 @@ const UserAccountNav = ({ user }: { user: User }) => {
               {user.name && <p className="font-medium">{user.name}</p>}
               {user.email && (
                 <p className="w-[200px] truncate text-sm text-muted-foreground">
-                  {user.email}k
+                  {user.email}
                 </p>
               )}
             </div>
@@ -81,11 +78,17 @@ const UserAccountNav = ({ user }: { user: User }) => {
             <Link href="/settings">Settings</Link>
           </DropdownMenuItem>
 
-          <Link href="/api/auth/signout">
-            <DropdownMenuItem className="cursor-pointer">
-              Log out
-            </DropdownMenuItem>
-          </Link>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onSelect={(event) => {
+              event.preventDefault();
+              void signOut({
+                callbackUrl: `${window.location.origin}/sign-in`,
+              });
+            }}
+          >
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {/* 

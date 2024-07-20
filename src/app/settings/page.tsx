@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { UserNameForm } from "~/components/UserNameForm";
+import { authOptions, getAuthSession } from "~/server/api/routers/auth";
 
-import { authOptions, getServerAuthSession } from "~/server/api/routers/auth";
 
 export const metadata = {
   title: "Settings",
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function SettingsPage() {
-  const session = await getServerAuthSession();
+  const session = await getAuthSession();
 
   if (!session?.user) {
     redirect(authOptions?.pages?.signIn ?? "/signin");
@@ -26,6 +26,7 @@ export default async function SettingsPage() {
               name: session?.user?.name ?? "",
               id: session?.user?.id ?? "",
               email: session?.user?.email ?? "",
+              image: session?.user?.image ?? "",
             }}
           />
         </div>

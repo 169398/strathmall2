@@ -5,7 +5,6 @@ import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 import { Button, buttonVariants } from "~/components/ui/button";
 import MaxWidthWrapper from "~/components/MaxWidthWrapper";
 import Footer from "~/components/Footer";
-import ShopForm from "~/components/Shop/ShopForm";
 
 const perks = [
   {
@@ -55,7 +54,6 @@ export default function Home() {
         /> */}
        
       </MaxWidthWrapper>
-<ShopForm />
       <section className="border-grray-200 border-t bg-gray-50">
         <MaxWidthWrapper className="py-20">
           <div className="lg-gap-y-0 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">

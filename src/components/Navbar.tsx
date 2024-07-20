@@ -6,10 +6,10 @@ import UserAccountNav from "./UserAccountNav";
 import NavItems from "./NavItems";
 import Cart from "./Cart";
 import MobileNav from "./MobileNav";
-import { getServerAuthSession } from "~/server/api/routers/auth";
+import { getAuthSession } from "~/server/api/routers/auth";
 
 export default async function Navbar() {
-  const session = await getServerAuthSession();
+  const session = await getAuthSession();
 
   return (
     <div className="sticky inset-x-0 top-0 z-50 h-16 bg-white">
@@ -39,7 +39,7 @@ export default async function Navbar() {
                   {!session && (
                     <>
                       <Link
-                        href="/api/auth/signin"
+                        href="/sign-in"
                         className={buttonVariants({
                           variant: "ghost",
                         })}
@@ -51,7 +51,7 @@ export default async function Navbar() {
                         aria-hidden="true"
                       />
                       <Link
-                        href="/api/auth/signin"
+                        href="sign-in"
                         className={buttonVariants({
                           variant: "ghost",
                         })}

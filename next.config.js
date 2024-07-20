@@ -4,7 +4,16 @@
  */
 await import("./src/env.js");
 
-/** @type {import("next").NextConfig} */
-const config = {};
 
-export default config;
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ['uploadthing.com', 'lh3.googleusercontent.com'],
+  },
+  experimental: {
+    //  appDir: true
+  }
+}
+
+export default     nextConfig;
